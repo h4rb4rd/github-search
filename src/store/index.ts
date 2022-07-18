@@ -1,9 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { setupListeners } from '@reduxjs/toolkit/dist/query'
+
+import { favoritesReducer } from './slices/favorites'
 import { githubApi } from '../services/githubService'
+import { setupListeners } from '@reduxjs/toolkit/dist/query'
 
 const rootReducer = combineReducers({
 	[githubApi.reducerPath]: githubApi.reducer,
+	favorites: favoritesReducer,
 })
 
 export const setupStore = () => {
