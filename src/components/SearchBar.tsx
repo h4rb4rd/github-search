@@ -25,7 +25,10 @@ const SearchBar = ({ showRepos }: SearchBarProps) => {
 			<li
 				key={user.id}
 				className='py-2 px-4 hover:bg-gray-500 hover:text-white transition-colors cursor-pointer'
-				onClick={() => showRepos(user.login)}
+				onClick={() => {
+					showRepos(user.login)
+					setIsDropDown(false)
+				}}
 			>
 				{user.login}
 			</li>
@@ -39,7 +42,7 @@ const SearchBar = ({ showRepos }: SearchBarProps) => {
 	return (
 		<>
 			{isError && <Error />}
-			<div className='relative w-[560px] '>
+			<div className='relative max-w-xl w-full z-50'>
 				<input
 					className='border py-2 px-4 w-full h-[42px] mb-2'
 					type='text'
