@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import { githubApi } from '../services/githubService'
 
 const rootReducer = combineReducers({
@@ -12,6 +13,10 @@ export const setupStore = () => {
 			getDefaultMiddleware().concat(githubApi.middleware),
 	})
 }
+
+export const store = setupStore()
+
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>

@@ -4,11 +4,9 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
 import App from './components/App'
-import { setupStore } from './store'
+import { store } from './store'
 
 import './styles/index.css'
-
-export const store = setupStore()
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

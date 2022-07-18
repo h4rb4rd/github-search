@@ -1,11 +1,17 @@
-import { useSearchUsersQuery } from '../services/githubService'
+import SearchBar from '../components/SearchBar'
 
 const Home = () => {
-	const { isLoading, isError, data } = useSearchUsersQuery('h4rb4rd')
+	const showRepos = (username: string) => {
+		console.log(username)
+	}
 
-	console.log(data)
-
-	return <div>Home</div>
+	return (
+		<>
+			{/* search */}
+			<SearchBar showRepos={showRepos} />
+			{/* repos */}
+		</>
+	)
 }
 
 export default Home
