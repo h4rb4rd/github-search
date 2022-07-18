@@ -1,5 +1,7 @@
+import AppRouter from './AppRouter'
+
 const App = () => {
-	return <h1 className='font-bold'>App a </h1>
+	return <AppRouter />
 }
 
 export default App
