@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
 import Error from './Error'
 import { useDebounce } from '../hooks/useDebounce'
 import { useSearchUsersQuery } from '../services/githubService'
+import { useClickOutside } from '../hooks/useClickOutside'
 
 interface SearchBarProps {
 	showRepos: (username: string) => void
@@ -12,6 +13,7 @@ const SearchBar = ({ showRepos }: SearchBarProps) => {
 	const [searchValue, setSearchValue] = useState('')
 	const [isDropDown, setIsDropDown] = useState(false)
 	const debouncedSearchValue = useDebounce(searchValue)
+	const searchBarRef = useRef(null)
 	const { isLoading, isError, data } = useSearchUsersQuery(
 		debouncedSearchValue,
 		{
@@ -39,10 +41,12 @@ const SearchBar = ({ showRepos }: SearchBarProps) => {
 		setIsDropDown(debouncedSearchValue.length > 3 && data?.length! > 0)
 	}, [debouncedSearchValue, data])
 
+	useClickOutside(searchBarRef, () => setIsDropDown(false))
+
 	return (
 		<>
 			{isError && <Error />}
-			<div className='relative max-w-xl w-full z-50'>
+			<div ref={searchBarRef} className='relative max-w-xl w-full z-50'>
 				<input
 					className='border py-2 px-4 w-full h-[42px] mb-2'
 					type='text'
